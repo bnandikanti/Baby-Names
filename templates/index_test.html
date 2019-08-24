@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Index</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 jumbotron text-center">
+        <h1>Baby Names</h1>
+        <p>Use the interactive charts below to explore the dataset</p>
+      </div>
+    </div>
+    <div class="row"></div>
+      <div class="col-lg-2">
+        <div class="well">
+            <div class="panel panel-primary">
+          <div class="panel-heading"> 
+            <h3 class="panel-title">Sample MetaData</h3>
+          </div>
+         
+        </div>
+          <h5>SELECT Year:</h5>
+          <select id="selDataset" onchange="optionChanged(this.value)">
+          </select>
+          <h5>SELECT Girl Name:</h5>
+          <select id="selNAMEDataset" onchange="optionChanged(this.value)">
+          </select>
+          <h5>SELECT Boy Name:</h5>
+          <select id="selMNAMEDataset" onchange="optionChanged(this.value)">
+          </select>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <div id="gauge"></div>
+      </div>
+        <div class="col-lg-5">
+          <div id="gauge1"></div>
+        </div>
+    </div>
+  </div>
+
+	<style>html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.chart--container {
+  height: 100%;
+  width: 100%;
+  min-height: 150px;
+}
+
+.zc-ref {
+  display: none;
+}
+zing-grid[loading]{height:480px;}</style></head>
+	<!-- <body> -->
+		<div id="myChart" class="chart--container"><a class="zc-ref" href="https://www.zingchart.com/">Powered by ZingChart</a></div>
+	<script>ZC.LICENSE=["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"];let chartConfig = {
+  backgroundColor: '#ffffff',
+  graphset: [
+    {
+      type: 'wordcloud',
+      backgroundColor: '#ffe6ea',
+      width: '50%',
+      height: '100%',
+      x: '0%',
+      y: '0%',
+  
+      options: {
+        text: 'Jessica Ashley Brittany Amanda Sarah Samantha Jennifer Stephanie Lauren Elizabeth Jessica Ashley Brittany Amanda\
+         Samantha Sarah Stephanie Jennifer Elizabeth Lauren Ashley Jessica Brittany Amanda Samantha Sarah Stephanie Jennifer\
+         Elizabeth Emily Ashley Jessica Amanda Brittany Sarah Samantha Emily Stephanie Elizabeth Megan Jessica Ashley Sarah Samantha\
+         Emily Brittany Taylor Amanda Elizabeth Stephanie Jessica Ashley Emily Samantha Sarah Taylor Brittany Amanda Elizabeth Megan\
+         Jessica Ashley Emily Samantha Sarah Taylor Hannah Brittany Amanda Elizabeth Emily Jessica Ashley Sarah Samantha Taylor Hannah\
+         Alexis Rachel Elizabeth Emily Jessica Ashley Sarah Hannah Samantha Taylor Alexis Elizabeth Madison Emily Hannah Samantha\
+         Sarah Ashley Alexis Taylor Jessica Madison Elizabeth Emily Hannah Alexis Sarah Samantha Ashley Madison Taylor Jessica\
+         Elizabeth Emily Hannah Madison Ashley Sarah Alexis Samantha Jessica Elizabeth Taylor Emily Madison Hannah Ashley Alexis\
+         Sarah Samantha Abigail Elizabeth Olivia Emily Madison Hannah Emma Alexis Ashley Abigail Sarah Samantha Olivia Emily Emma\
+         Madison Hannah Olivia Abigail Alexis Ashley Elizabeth Samantha Emily Emma Madison Olivia Hannah Abigail Isabella Ashley\
+         Samantha Elizabeth Emily Emma Madison Abigail Olivia Isabella Hannah Samantha Ava Ashley Emily Emma Madison Isabella Ava\
+         Abigail Olivia Hannah Sophia Samantha Emily Isabella Emma Ava Madison Sophia Olivia Abigail Hannah Elizabeth Emma Isabella\
+         Emily Olivia Ava Madison Sophia Abigail Elizabeth Chloe Isabella Emma Olivia Sophia Ava Emily Madison Abigail Chloe Mia\
+         Isabella Sophia Emma Olivia Ava Emily Abigail Madison Chloe Mia Sophia Isabella Emma Olivia Ava Emily Abigail Madison\
+         Mia Chloe Sophia Emma Isabella Olivia Ava Emily Abigail Mia Madison Elizabeth Sophia Emma Olivia Isabella Ava Mia Emily\
+         Abigail Madison Elizabeth Emma Olivia Sophia Isabella Ava Mia Emily Abigail Madison Charlotte',
+        style: {
+          fontFamily: 'Crete Round',
+          maxFontSize: '30px',
+          minFontSize: '9px',
+          aspect: 'spiral',
+          hoverState: {
+          backgroundColor: '#D32F2F',
+          borderRadius: 2,
+          fontColor: 'white'
+      },
+        tooltip: {
+          text: '%text: %hits',
+          visible: true,
+          alpha: 0.9,
+          backgroundColor: '#1976D2',
+          borderRadius: 2,
+          borderColor: 'none',
+          fontColor: 'white',
+          fontFamily: 'Georgia',
+          textAlpha: 1
+      }
+      },
+      plotarea: {
+        margin: '50px auto auto auto'
+        }
+      }
+    },
+    {
+      type: 'wordcloud',
+      backgroundColor: '#F2F3F8',
+      width: '50%',
+      height: '100%',
+      x: '51%',
+      y: '0%',
+  
+      options: {
+        text: 'Michael Christopher Matthew Joshua David Daniel Andrew Justin James Robert Michael Christopher Matthew Joshua\ Daniel David Andrew James Justin Joseph Michael Christopher Matthew Joshua Andrew Daniel James David Joseph John\
+        Michael Christopher Matthew Joshua Andrew Brandon Daniel Tyler James David Michael Christopher Matthew Joshua Tyler Brandon\ Daniel Nicholas Jacob Andrew Michael Christopher Matthew Joshua Tyler Brandon Jacob Daniel Nicholas Andrew Michael Matthew\ Christopher Jacob Joshua Nicholas Tyler Brandon Daniel Austin Michael Matthew Jacob Christopher Joshua Nicholas Tyler Brandon\ Austin Andrew Michael Jacob Matthew Christopher Joshua Nicholas Brandon Andrew Austin Tyler\
+        Michael Jacob Matthew Joshua Christopher Nicholas Brandon Tyler Andrew Austin Jacob Michael Matthew Joshua Nicholas\ Christopher Andrew Joseph Daniel Tyler Jacob Michael Matthew Joshua Christopher Nicholas Andrew Joseph Daniel Tyler\
+        Jacob Michael Matthew Joshua Christopher Nicholas Andrew Joseph Daniel William Jacob Michael Joshua Matthew Ethan Andrew\ Joseph Christopher Nicholas Daniel Jacob Michael Joshua Matthew Andrew Ethan Joseph Daniel Christopher Anthony Jacob\ Michael Joshua Matthew Ethan Andrew Daniel William Joseph Christopher Jacob Michael Joshua Matthew Ethan Andrew Daniel\ Anthony Joseph Christopher Jacob Michael Joshua Ethan Matthew Daniel Andrew Christopher Anthony William Jacob Michael\ Ethan Joshua Daniel Christopher Anthony William Matthew Andrew Jacob Michael Ethan Joshua Daniel Alexander William\ Anthony Christopher Matthew Jacob Ethan Michael Alexander William Joshua Daniel Jayden Noah Christopher Jacob Ethan\ Michael Jayden William Alexander Noah Daniel Aiden Anthony Jacob Mason William Jayden Noah Michael Ethan Alexander Aiden\ Daniel Jacob Mason Ethan Noah William Liam Michael Jayden Alexander Aiden Noah Liam Jacob Mason William Ethan Michael\ Alexander Jayden Daniel Noah Liam Mason Jacob William Ethan Michael Alexander James Daniel',
+        style: {
+          fontFamily: 'Crete Round',
+          maxFontSize: '30px',
+          minFontSize: '9px',
+          aspect: 'spiral',
+          hoverState: {
+            backgroundColor: '#D32F2F',
+            borderRadius: 2,
+            fontColor: 'white'
+          },
+          tooltip: {
+            text: '%text: %hits',
+            visible: true,
+            alpha: 0.9,
+            backgroundColor: '#1976D2',
+            borderRadius: 2,
+            borderColor: 'none',
+            fontColor: 'white',
+            fontFamily: 'Georgia',
+            textAlpha: 1
+            }
+        },
+      plotarea: {
+        margin: '50px auto auto auto'
+      }
+    }
+  }
+  ]
+  };
+
+zingchart.render({
+  id: 'myChart',
+  data: chartConfig
+});</script>
+  <div class="row">
+
+    <div class="col-md-12">
+      <div id="bubble"></div>
+      <h5>Word Cloud</h5>
+    </div>
+  </div> 
+  
+  <script src="https://cdn.plot.ly/plotly-1.31.2.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+<!-- <script src="{{ url_for('static', filename='js/app.js') }}"></script> -->
+<!-- <script src="{{ url_for('static', filename='js/test.js') }}"></script> -->
+  <script src="{{ url_for('static', filename='js/guage.js') }}"></script>
+
+</body>
+
+</html>

@@ -44,6 +44,19 @@ def index():
     """/years/"""
     return render_template("index.html")
 
+@app.route("/wordcloud")
+def indexWordCloud():
+    """/guagechart/male/<Year>/"""
+    """/guagechart/female/<Year>/"""
+    """/comparison/<Movie_Year>/<Baby_Year>"""
+    """/male/names/<Year>"""
+    """/female/names/<Year>"""
+    """/number/unique/babynames"""
+    """/all/femalenames"""
+    """/all/malenames"""
+    """/years/"""
+    return render_template("index-wordclouds.html")
+
 @app.route("/years/")
 def years():
     results = db.session.query('DISTINCT Year FROM femalenames').all()
@@ -61,7 +74,7 @@ def maleNAMES():
     sel = [
         Boy_Names.Name,
     ]
-    results = db.session.query(*sel).all()
+    results = db.session.query(*sel).filter(Boy_Names.Year == '2014').limit(10)
     # Create a dictionary entry for each row of metadata information
     malenames = []    
     for result in results:
@@ -81,7 +94,8 @@ def femaleNames():
     sel = [
         Girl_Names.Name,
     ]
-    results = db.session.query(*sel).filter(Girl_Names.Rank > 24).all()
+    # results = db.session.query(*sel).filter(Girl_Names.Rank > 24).limit(10)
+    results = db.session.query(*sel).filter(Girl_Names.Year == '2015').limit(10)
     # Create a dictionary entry for each row of metadata information
     femalenames = []    
     for result in results:
@@ -94,6 +108,27 @@ def femaleNames():
     
     return jsonify(females)
 
+
+
+@app.route("/all/malenames")
+def maleNames():
+    """Return a list of colums."""
+    """Return a list of colums."""
+    sel = [
+        Boy_Names.Name,
+    ]
+    results = db.session.query(*sel).filter(Boy_Names.Rank > 95).limit(10)
+    # Create a dictionary entry for each row of metadata information
+    malenames = []    
+    for result in results:
+        malenames.append(result[0])
+    
+    string = str(malenames)
+    # .repalce("'", "").replace(",", ""))
+    males = string.replace("'", "").replace(",", "")
+    print(males)
+    
+    return jsonify(males)
 @app.route("/number/unique/babynames")
 def uniquemaleNAMES():
     """Return a list of colums."""
@@ -119,7 +154,7 @@ def femalenamesbyyear(Year):
         Girl_Names.Rank
     ]
 
-    results = db.session.query(*sel).filter(Girl_Names.Year == Year).all()
+    results = db.session.query(*sel).filter(Girl_Names.Year == Year).limit(10)
 
     # Create a dictionary entry for each row of metadata information
     baby_something = []
@@ -166,8 +201,114 @@ def malenamesbyyears(Year):
     return jsonify(baby_something)
 
 
+# @app.route("/comparison/<Movie_Year>/<Baby_Year>")
+# def comparisoncharts(Movie_Year, Baby_Year):
+#     """Return a list of colums."""
+#     sel = [
+#         Movies.ID,
+#         Movies.Characters,
+#         Movies.Actors,
+#         Movies.Poster,
+#         Movies.Title,
+#         Movies.Year,
+#         Movies.imdbID,
+#     ]
+#     selF = [
+#         Girl_Names.ID,
+#         Girl_Names.Name,
+#         Girl_Names.Year,
+#     ]
+#     selM = [
+#         Boy_Names.ID,
+#         Boy_Names.Name,
+#         Boy_Names.Year,
+#     ]
+#     Mresults = db.session.query(*selM).filter(Boy_Names.Year == Baby_Year).limit(10)
+#     Fresults = db.session.query(*selF).filter(Girl_Names.Year == Baby_Year).limit(10)
+    
+#         # Create a dictionary entry for each row of metadata information
+
+#     results = db.session.query(*sel).filter((Movies.Year == Movie_Year)).all()
+#     # print(results)
+#     movie_something = []
+#     Fbaby_something = []
+#     Mbaby_something = []
+#     MMmovies = []
+#     for result in results:
+#         babynames_metadata = {}
+#         MMmovies.append(result[1])
+#         babynames_metadata["Id"] = result[0]
+#         babynames_metadata["Characters"] = result[1]
+#         babynames_metadata["Year"] = result[5]
+#         movie_something.append(babynames_metadata)
+
+#     for result in Fresults:
+#         babynames_metadata = {}
+#         babynames_metadata["Id"] = result[0]
+#         babynames_metadata["Name"] = result[1]
+#         babynames_metadata["Year"] = int(result[2])
+#         Fbaby_something.append(babynames_metadata)
+#     for result in Mresults:
+#         babynames_metadata = {}
+#         babynames_metadata["Id"] = result[0]
+#         babynames_metadata["Name"] = result[1]
+#         babynames_metadata["Year"] = int(result[2])
+#         Mbaby_something.append(babynames_metadata)
+#     # return jsonify(baby_something)
+#     graphdata = []
+#     fcounter = []
+#     mcounter = []
+#     print(MMmovies)
+#     fname = []
+#     mname = []
+    
+#     for i in range(len(Fbaby_something)):
+#         Fname = Fbaby_something[i]["Name"]
+#         count = 0
+#         for j in MMmovies:
+            
+#             k = j.replace(",", " ")
+#             k = k.replace("/", " ")
+#             k = k.replace("(", " ")
+#             k = k.replace(")", " ")
+#             k = str(k).split(" ")
+#             if Fname in k:
+#                 count = count +1
+
+#         fcounter.append(count)
+#         fname.append(Fname)
+#     femalegraphdata = {
+#         "Names": fname,
+#         "Number": fcounter,
+#         "Year": Fbaby_something[0]["Year"]
+# }
+#     for i in range(len(Mbaby_something)):
+#         Mname = Mbaby_something[i]["Name"]
+#         count = 0
+#         for j in MMmovies:   
+#             k = j.replace(",", " ")
+#             k = k.replace("/", " ")
+#             k = k.replace("(", " ")
+#             k = k.replace(")", " ")
+#             k = str(k).split(" ")
+#             if Mname in k:
+#                 count = count +1
+
+#         mcounter.append(count)
+#         mname.append(Mname)
+#     malegraphdata = {
+#         "Names": mname,
+#         "Number": mcounter,
+#         "Year": Mbaby_something[0]["Year"]
+# }
+
+#     graphdata.append(femalegraphdata)
+#     graphdata.append(malegraphdata)
+
+#     return jsonify(graphdata)
+
 @app.route("/comparison/<Movie_Year>/<Baby_Year>")
-def comparisoncharts(Movie_Year, Baby_Year):
+def scattrplot(Movie_Year, Baby_Year):
     """Return a list of colums."""
     sel = [
         Movies.ID,
@@ -199,12 +340,19 @@ def comparisoncharts(Movie_Year, Baby_Year):
     Fbaby_something = []
     Mbaby_something = []
     MMmovies = []
+    movieTitle = []
+    
+
     for result in results:
         babynames_metadata = {}
         MMmovies.append(result[1])
+        movieTitle.append(result[4])
         babynames_metadata["Id"] = result[0]
         babynames_metadata["Characters"] = result[1]
         babynames_metadata["Year"] = result[5]
+        babynames_metadata["Poster"] = result[3]
+        babynames_metadata["Title"] = result[4]
+        
         movie_something.append(babynames_metadata)
 
     for result in Fresults:
@@ -219,19 +367,23 @@ def comparisoncharts(Movie_Year, Baby_Year):
         babynames_metadata["Name"] = result[1]
         babynames_metadata["Year"] = int(result[2])
         Mbaby_something.append(babynames_metadata)
-    # return jsonify(baby_something)
+    # return jsonify(movie_something)
     graphdata = []
     fcounter = []
     mcounter = []
-    print(MMmovies)
+    # print(MMmovies)
     fname = []
     mname = []
-    
+    fmovie = []
+    mmovie = []
+    fallnames = []
+    mallnames = []
     for i in range(len(Fbaby_something)):
         Fname = Fbaby_something[i]["Name"]
+
         count = 0
         for j in MMmovies:
-            
+            # print(MMmovies)
             k = j.replace(",", " ")
             k = k.replace("/", " ")
             k = k.replace("(", " ")
@@ -239,13 +391,25 @@ def comparisoncharts(Movie_Year, Baby_Year):
             k = str(k).split(" ")
             if Fname in k:
                 count = count +1
+                nameIndex = MMmovies.index(j)
+                print(movieTitle[nameIndex])
+                fname.append(Fname)
+                fmovie.append(movieTitle[nameIndex])
+                # movie = movie.append(MMmovies[j])
+
 
         fcounter.append(count)
-        fname.append(Fname)
+        fallnames.append(Fname)
+        
+        # movie.append(movie)
+        
     femalegraphdata = {
-        "Names": fname,
+        "TopNames": fallnames,
         "Number": fcounter,
-        "Year": Fbaby_something[0]["Year"]
+        "Year": Fbaby_something[0]["Year"],
+        "Movie": fmovie,
+        "Name": fname
+
 }
     for i in range(len(Mbaby_something)):
         Mname = Mbaby_something[i]["Name"]
@@ -258,13 +422,20 @@ def comparisoncharts(Movie_Year, Baby_Year):
             k = str(k).split(" ")
             if Mname in k:
                 count = count +1
+                nameIndex = MMmovies.index(j)
+                print(movieTitle[nameIndex])
+                mname.append(Mname)
+                mmovie.append(movieTitle[nameIndex])
 
         mcounter.append(count)
-        mname.append(Mname)
+        # mname.append(Mname)
+        mallnames.append(Mname)
     malegraphdata = {
-        "Names": mname,
+        "TopNames": mallnames,
         "Number": mcounter,
-        "Year": Mbaby_something[0]["Year"]
+        "Year": Mbaby_something[0]["Year"],
+        "Movie": mmovie,
+        "Name": mname
 }
 
     graphdata.append(femalegraphdata)
@@ -334,8 +505,8 @@ def maleguageChart(Year):
         Boy_Names.Year
     ]
 
-    results = db.session.query(*sel).filter(Boy_Names.Year == Year).all()
-    movieResults = db.session.query(Movies.Characters).all()
+    results = db.session.query(*sel).filter(Boy_Names.Year == Year).limit(10)
+    movieResults = db.session.query(Movies.Characters).limit(10)
 
     movie_something = []
     Mbaby_something = []

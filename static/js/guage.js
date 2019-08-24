@@ -54,7 +54,7 @@ function handleSubmit() {
   var index = data.Names.indexOf(Name)
   //console.log(index)
   var count = data.Number[index]
-  console.log(count)
+  console.log(`boycount : ${count}`)
   var level = (parseFloat(count) * 10)
   //console.log(level)
   //console.log(Name)
@@ -82,16 +82,16 @@ function handleSubmit() {
    hoverinfo: 'text+name'},
   { values: [50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50],
   rotation: 90,
-  text: ['16-18', '14-16', '12-14', '10-12', '8-10', '6-8', '4-6',
-           '2-4', '0-2', ''],
+  text: ['8-9', '7-8', '6-7', '5-6', '4-5', '3-4', '2-3',
+           '1-2', '0-1', ''],
   textinfo: 'text',
   textposition:'inside',
   marker: {colors:[ 'rgba(0,128,0, .9)', 'rgba(0,128,0, .8)', 'rgba(0,128, 0, .7)', 
                     'rgba(0,128, 0, .6)', 'rgba(0,128, 0, .5)',	'rgba(0,128, 0, .4)',
                     'rgba(0,128, 0, .3)', 'rgba(0,128, 0, .2)', 'rgba(0,128, 0, .1)',
                     'rgba(255, 255, 255, 0)']},
-  labels: ['16-18', '14-16', '12-14', '10-12', '8-10', '6-8', '4-6',
-  '2-4', '0-2', ''],
+  labels:['8-9', '7-8', '6-7', '5-6', '4-5', '3-4', '2-3',
+  '1-2', '0-1', ''],
   hoverinfo: 'label',
   hole: .5,
   type: 'pie',
@@ -107,7 +107,7 @@ function handleSubmit() {
        color: '850000'
      }
    }],
-  title: '<b>Girl Baby Names</b> <br>Count Per Year',
+  title: '<b>Boy Baby Names</b> <br>Count Per Year',
   height:400,
   width:400,
   xaxis: {zeroline:false, showticklabels:false,
@@ -129,9 +129,9 @@ function handleSubmit() {
   //   console.log(data.Names.findIndex(nameIndex))
     var index = data.Names.indexOf(Name)
     //console.log(index)
-    var count = data.Number[index]
-    console.log(count)
-    var level = (parseFloat(count) * 10)
+    var Femalecount = data.Number[index]
+    console.log(`female count: ${Femalecount}`)
+    var level = (parseFloat(Femalecount) * 10)
     //console.log(level)
     //console.log(Name)
     
@@ -158,16 +158,16 @@ function handleSubmit() {
      hoverinfo: 'text+name'},
     { values: [50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50/9, 50],
     rotation: 90,
-    text: ['16-18', '14-16', '12-14', '10-12', '8-10', '6-8', '4-6',
-    '2-4', '0-2', ''],
+    text: ['8-9', '7-8', '6-7', '5-6', '4-5', '3-4', '2-3',
+    '1-2', '0-1', ''],
     textinfo: 'text',
     textposition:'inside',
     marker: {colors:[ 'rgba(0,128,0, .9)', 'rgba(0,128,0, .8)', 'rgba(0,128, 0, .7)', 
                       'rgba(0,128, 0, .6)', 'rgba(0,128, 0, .5)',	'rgba(0,128, 0, .4)',
                       'rgba(0,128, 0, .3)', 'rgba(0,128, 0, .2)', 'rgba(0,128, 0, .1)',
                       'rgba(255, 255, 255, 0)']},
-    labels: ['16-18', '14-16', '12-14', '10-12', '8-10', '6-8', '4-6',
-    '2-4', '0-2', ''],
+    labels: ['8-9', '7-8', '6-7', '5-6', '4-5', '3-4', '2-3',
+    '1-2', '0-1', ''],
     hoverinfo: 'label',
     hole: .5,
     type: 'pie',
@@ -183,7 +183,7 @@ function handleSubmit() {
          color: '850000'
        }
      }],
-    title: '<b>Boy Baby Names</b> <br>Count Per Year',
+    title: '<b>Girl Baby Names</b> <br>Count Per Year',
     height:400,
     width:400,
     xaxis: {zeroline:false, showticklabels:false,
